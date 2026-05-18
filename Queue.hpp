@@ -1,7 +1,6 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <algorithm>
 #include <array>
 #include <atomic>
 
@@ -32,6 +31,8 @@ class Queue {
 #endif
 
 #ifdef QUEUE_IMPL
+
+#include <algorithm>
 
 template <typename T, std::size_t N>
 template <std::size_t I>
