@@ -31,7 +31,9 @@ class Queue {
     std::atomic<std::size_t> m_front{N};
     std::array<T, N+1> m_buffer{};
 };
+#endif
 
+#ifdef QUEUE_IMPL
 
 template <typename T, std::size_t N>
 template <std::size_t I>
