@@ -43,8 +43,8 @@ std::size_t Queue<T, N>::push(std::array<T, I>& src, std::size_t n, std::size_t 
     for (; numPushed < n; ++numPushed) {
         std::size_t next {(m_back + 1) % (N + 1)};
         if (next == front) break;
+        m_buffer[next] = src[offset++];
         m_back = next;
-        m_buffer[m_back] = src[offset++];
     }
 
     return numPushed;
@@ -58,8 +58,9 @@ std::size_t Queue<T, N>::pop(std::array<T, I>& dest, std::size_t n, std::size_t 
 
     std::size_t numPopped{0};
     for (; numPopped < n; ++numPopped) {
-        m_front = (m_front + 1) % (N + 1); 
-        dest[offset++] = m_buffer[m_front];
+        std::size_t next = {(m_front + 1) % (N + 1)}; 
+        dest[offset++] = m_buffer[next];
+        m_front = next;
         if (m_front == back) return numPopped + 1;
     }
 
